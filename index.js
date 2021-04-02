@@ -1,14 +1,15 @@
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 canvas.style.border = '5px solid brown';
-canvas.style.backgroundColor = '#D6B471'
+canvas.style.backgroundColor = '#f0c6a3'
 
 
 
 // The DOM of the start and the restart buttons
 let startBtn = document.querySelector('#start')
-let restartBtn = document.querySelector('#mainmenu')
-
+let mainMenuBtn = document.querySelector('#mainmenu')
+let splashScreen = document.querySelector('#splash')
+let restartBtn = document.querySelector('#restart')
 
 
 
@@ -107,14 +108,8 @@ function drawDagger(){
 
 
 
-function splashScreen(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    
-    ctx.fillStyle = 'white'
-    ctx.font = '45px Verdana'
-    ctx.fillText("Thor's conquest",canvas.width/3,40)
 
-}
+
 
 function animate(){
     
@@ -137,30 +132,40 @@ function animate(){
 
 
 function start(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    
+    
+    splashScreen.style.display = 'none'
+    canvas.style.display = 'block'
     startBtn.style.display = 'none'
     restartBtn.style.display = 'block'
     animate()
 }
 
 function mainMenu() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    canvas.style.display = 'none'
+    splashScreen.style.display = 'block'
+
     startBtn.style.display = 'block'   
     restartBtn.style.display = 'none'
     isGameOver = false;
     thorX = 20;
     thorY= 580;
     score = 0;
-    splashScreen()
+    
 }
 
 
 
 
 window.addEventListener('load', () => {
+    startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
+    canvas.style.display = 'none'
+    
     startBtn.addEventListener('click', () =>{
+         
         start()
+        
     })
     restartBtn.addEventListener('click', () => {
         mainMenu()
