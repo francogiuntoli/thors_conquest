@@ -1,0 +1,50 @@
+* {
+    font-family: "Roboto", sans-serif;
+    color:white;
+  }
+body{
+    text-align: center;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 1000;
+    height: 800;
+    background-image: url("/img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+button{
+    transition-duration: 0.4s;
+    color:rgba(0, 0, 0, 0.8);
+    background-color:rgba(255, 255, 255, 0.8);
+    border: 3px solid white;
+    border-radius: 5px;
+    
+    text-align: center;
+    font-size: 3em;
+
+}
+button:hover{
+    background-color: rgba(0, 23, 128, 0.705);
+    color: white;
+}
+
+#restart{
+    margin:auto;
+}
+h1{
+    color:rgba(255, 255, 255, 0.8);
+    font-size: 11em;
+}
+h2{
+    color:rgba(255, 255, 255, 0.8);
+    font-size: 4em;
+}
+p{
+    font-size: 3em;
+}
+
+

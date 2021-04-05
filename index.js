@@ -131,7 +131,6 @@ function drawMjolnir(){
 }
 //thor
 function drawThor(){
-
     ctx.drawImage(thorhq, thorX, thorY, thorW, thorH)
 }
 //loki
@@ -213,7 +212,7 @@ function daggerMoving(){
         if (daggers[i].y >= canvas.height) {
             daggers[i] = {
                 x: Math.floor(Math.random()*canvas.width), 
-                y: -500 -Math.floor(Math.random()*daggerH)
+                y: -Math.floor(Math.random()*daggerH)
             }
         }
         
@@ -268,40 +267,41 @@ function animate(){
 
 //screens
 function start(){
+    daggers = [
+        {x: 20, y: -500},
+        {x: 300, y: -50},
+        {x: 600, y: -150},
+        {x: 450, y: -350},
+    ];
+    thorX = 20;
+    thorY = 580;
+    isGameOver = false;
     splashScreen.style.display = 'none'
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
-    restartBtn.style.display = 'none'
-    mainMenuBtn.style.display = 'block'
+    restartBtn.style.display = 'block'
     animate()
 }
-function mainMenu() {
-    
-    canvas.style.display = 'none'
-    splashScreen.style.display = 'block'
-    startBtn.style.display = 'block'   
-    restartBtn.style.display = 'none'
-    mainMenuBtn.style.display = 'none'
-    gameOverScreen.style.display = 'none'
-    isGameOver = false;
-    
-    
-}
+
 function restart() {
+    daggers = [
+        {x: 20, y: -500},
+        {x: 300, y: -50},
+        {x: 600, y: -150},
+        {x: 450, y: -350},
+    ];
     thorX = 20;
     thorY = 580;
+    isGameOver = false;
     gameOverScreen.style.display = 'none'
     canvas.style.display = 'block'    
     restartBtn.style.display = 'block'
-    mainMenuBtn.style.display = 'block'
-    isGameOver = false;
     animate()
 }
 
 function gameOver() {
     restartBtn.style.display = 'block'
     canvas.style.display = 'none'    
-    mainMenuBtn.style.display = 'block'
     isGameOver = false;
     thorX = 20;
     thorY= 580;
@@ -317,7 +317,6 @@ let stabAudio = new Audio('./stab.mp3')
 window.addEventListener('load', () => {
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
-    mainMenuBtn.style.display = 'none'   
     canvas.style.display = 'none'
     gameOverScreen.style.display = 'none'
     
@@ -328,7 +327,5 @@ window.addEventListener('load', () => {
     restartBtn.addEventListener('click', () => {
         restart()
     })
-    mainMenuBtn.addEventListener('click', () => {
-        mainMenu()
-    })
+    
 })
