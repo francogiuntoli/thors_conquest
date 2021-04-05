@@ -152,7 +152,7 @@ let daggers = [
 
 function thorMoving(){
     if(thorY>=453){
-        if(isArrowRight && thorX+(thorhq.width/15)<canvas.width-20 ){
+        if(isArrowRight && thorX+thorW<canvas.width-20 ){
             
             thorX += Math.floor(thorMove/1.5)
             thorY -= Math.floor(thorMove/9)
@@ -165,42 +165,42 @@ function thorMoving(){
            
         }
     }
-    // else if(thorY<=452 && thorY>=306){
-    //     if(isArrowLeft && thorX-10>0){
+    else if(thorY<=452 && thorY>=306){
+        if(isArrowLeft && thorX-10>0){
             
-    //         thorX -= Math.floor(thorMove/1.5)
-    //         thorY -= Math.floor(thorMove/9)
-    //         console.log(thorY)
-    //         console.log(thorX)
-    //         console.log("cond3")
+            thorX -= Math.floor(thorMove/1.5)
+            thorY -= Math.floor(thorMove/9)
+            console.log(thorY)
+            console.log(thorX)
+            console.log("cond3")
             
-    //     }
-    //     if(isArrowRight && thorX+(thorhq.width/15)<canvas.width-20 ){
-    //         thorX +=Math.floor(thorMove/1.5)
-    //         thorY +=Math.floor(thorMove/9)
-    //         console.log(thorY)
-    //         console.log(thorX)
-    //         console.log("cond4")
-    //     }
-    // }else if(thorY<=305 && thorY>0){
+        }
+        if(isArrowRight && thorX+thorW<canvas.width-20 ){
+            thorX +=Math.floor(thorMove/1.5)
+            thorY +=Math.floor(thorMove/9)
+            console.log(thorY)
+            console.log(thorX)
+            console.log("cond4")
+        }
+    }else if(thorY<=305 && thorY>0){
 
-    //     if(isArrowRight && thorX+(thorhq.width/15)<canvas.width-20 ){
+        if(isArrowRight && thorX+thorW<canvas.width-20 ){
             
-    //         thorX += Math.floor(thorMove/1.5)
-    //         thorY -= Math.floor(thorMove/9)
-    //         console.log(thorY)
-    //         console.log(thorX)
-    //         console.log("cond5")
+            thorX += Math.floor(thorMove/1.5)
+            thorY -= Math.floor(thorMove/9)
+            console.log(thorY)
+            console.log(thorX)
+            console.log("cond5")
             
-    //     }
-    //     if(isArrowLeft && thorX-10>0){
-    //         thorX -=Math.floor(thorMove/1.5)
-    //         thorY +=Math.floor(thorMove/9)
-    //         console.log(thorY)
-    //         console.log(thorX)
-    //         console.log("cond6")
-    //     }
-    // }
+        }
+        if(isArrowLeft && thorX-10>0){
+            thorX -=Math.floor(thorMove/1.5)
+            thorY +=Math.floor(thorMove/9)
+            console.log(thorY)
+            console.log(thorX)
+            console.log("cond6")
+        }
+    }
 }
 
 function daggerMoving(){
@@ -222,7 +222,7 @@ function daggerMoving(){
             
             daggers[i].x = 20
             daggers[i].y = -1000
-            stabAudio.play();
+            // stabAudio.play();
             
             isGameOver = true;
             console.log('hit')
@@ -250,10 +250,11 @@ function animate(){
     
     if (isGameOver) {
         
-        gameOverAudio.play();
+        // gameOverAudio.play();
         cancelAnimationFrame(intervalId);
         canvas.style.display = 'none'
         gameOverScreen.style.display = 'block'
+        restartBtn.style.display = 'block'
     }
     else {
         intervalId = requestAnimationFrame(animate)
@@ -283,16 +284,23 @@ function mainMenu() {
     mainMenuBtn.style.display = 'none'
     gameOverScreen.style.display = 'none'
     isGameOver = false;
-    thorX = 20;
-    thorY= 580;
-    score = 0;
+    
     
 }
-function gameOver() {
-    
-    
-    canvas.style.display = 'none'
+function restart() {
+    thorX = 20;
+    thorY = 580;
+    gameOverScreen.style.display = 'none'
+    canvas.style.display = 'block'    
     restartBtn.style.display = 'block'
+    mainMenuBtn.style.display = 'block'
+    isGameOver = false;
+    animate()
+}
+
+function gameOver() {
+    restartBtn.style.display = 'block'
+    canvas.style.display = 'none'    
     mainMenuBtn.style.display = 'block'
     isGameOver = false;
     thorX = 20;
@@ -305,6 +313,7 @@ function gameOver() {
 
 let gameOverAudio = new Audio('./game-over.mp3')
 let stabAudio = new Audio('./stab.mp3')
+
 window.addEventListener('load', () => {
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
@@ -313,12 +322,11 @@ window.addEventListener('load', () => {
     gameOverScreen.style.display = 'none'
     
     startBtn.addEventListener('click', () =>{
-         
         start()
         
     })
     restartBtn.addEventListener('click', () => {
-        gameOver()
+        restart()
     })
     mainMenuBtn.addEventListener('click', () => {
         mainMenu()
