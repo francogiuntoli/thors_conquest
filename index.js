@@ -27,9 +27,10 @@ let dagger = new Image();
 dagger.src = './img/dagger.png'
 
 let intervalId = 0, isGameOver = false;
-let thorX = 20, thorY = 580, thorMove = 10;
-let daggerX = 30, daggerY = -35, daggerDrop = 10;
+let thorX = 20, thorY = 580, thorMove = 10 , thorW = thorhq.width/15, thorH = thorhq.height/15;
+let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
+let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25;
 
 //events
 document.addEventListener('keydown', (event) => {
@@ -126,21 +127,18 @@ function drawHill3(){
 }
 //mjolnir
 function drawMjolnir(){
-    ctx.drawImage(mjolnirhq, 600, 150, mjolnirhq.width/25, mjolnirhq.height/25)
+    ctx.drawImage(mjolnirhq, 600, 150, mjolnirW, mjolnirH)
 }
 //thor
 function drawThor(){
-    ctx.drawImage(thorhq, thorX, thorY, thorhq.width/15, thorhq.height/15)
+
+    ctx.drawImage(thorhq, thorX, thorY, thorW, thorH)
 }
 //loki
 function drawLoki(){
     ctx.drawImage(lokihq, 750, 0, lokihq.width/1.5, lokihq.height/1.5)
 }
 //dagger
-function drawDagger(){
-    
-    ctx.drawImage(dagger, 50, 100, dagger.width/10, dagger.height/10)
-}
 
 
 //for loopin
@@ -206,32 +204,31 @@ function thorMoving(){
 }
 
 function daggerMoving(){
+    
     for(let i=0; i< daggers.length; i++) {
-        ctx.drawImage(dagger, daggers[i].x, daggers[i].y, dagger.width/4, dagger.height/4)
-        daggers[i].y += 13
+        ctx.drawImage(dagger, daggers[i].x, daggers[i].y, daggerW, daggerH)
+        daggers[i].y += 11
         
         // making an infinite loop for the pipes
         if (daggers[i].y >= canvas.height) {
             daggers[i] = {
                 x: Math.floor(Math.random()*canvas.width), 
-                y: -Math.floor(Math.random()*canvas.height)
+                y: -500 -Math.floor(Math.random()*daggerH)
             }
         }
         
         //collision
-        if(thorX + (thorhq.width/15) >= daggers[i].x && thorX <= daggers[i].x + (dagger.width/5) && thorY <= daggers[i].y + (dagger.height/5) && thorY+(thorhq.height/15) >= daggers[i].y ){
+        if(daggers[i].x < thorX + thorW && daggers[i].x + daggerW > thorX && daggers[i].y + 50< thorY+thorH &&daggers[i].y + daggerH > thorY+50){
+            
+            daggers[i].x = 20
+            daggers[i].y = -1000
             stabAudio.play();
+            
             isGameOver = true;
             console.log('hit')
         }
 
-        
-            
-        
-        
-        
     }
-
 
 }
 
@@ -252,6 +249,8 @@ function animate(){
     
     
     if (isGameOver) {
+        
+        gameOverAudio.play();
         cancelAnimationFrame(intervalId);
         canvas.style.display = 'none'
         gameOverScreen.style.display = 'block'
@@ -268,8 +267,6 @@ function animate(){
 
 //screens
 function start(){
-    
-    
     splashScreen.style.display = 'none'
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
@@ -278,6 +275,7 @@ function start(){
     animate()
 }
 function mainMenu() {
+    
     canvas.style.display = 'none'
     splashScreen.style.display = 'block'
     startBtn.style.display = 'block'   
@@ -291,6 +289,8 @@ function mainMenu() {
     
 }
 function gameOver() {
+    
+    
     canvas.style.display = 'none'
     restartBtn.style.display = 'block'
     mainMenuBtn.style.display = 'block'
@@ -303,7 +303,7 @@ function gameOver() {
 
 
 
-// let gameOverAudio = new Audio('./game-over.mp3')
+let gameOverAudio = new Audio('./game-over.mp3')
 let stabAudio = new Audio('./stab.mp3')
 window.addEventListener('load', () => {
     startBtn.style.display = 'block'
