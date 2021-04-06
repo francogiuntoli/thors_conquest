@@ -13,7 +13,7 @@ body{
     height: 800;
     background-image: url("/img/bg.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover; 
   }
 
 button{
@@ -37,14 +37,14 @@ button:hover{
 }
 h1{
     color:rgba(255, 255, 255, 0.8);
-    font-size: 11em;
+    font-size: 11rem;
 }
 h2{
     color:rgba(255, 255, 255, 0.8);
-    font-size: 4em;
+    font-size: 4rem;
 }
 p{
-    font-size: 3em;
+    font-size: 3rem;
 }
 
 

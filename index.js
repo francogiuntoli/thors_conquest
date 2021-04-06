@@ -11,6 +11,7 @@ let startBtn = document.querySelector('#start')
 let mainMenuBtn = document.querySelector('#mainmenu')
 let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
+let scoreId = document.querySelector('#score')
 
 
 
@@ -26,25 +27,28 @@ lokihq.src = './img/loki.png'
 let dagger = new Image();
 dagger.src = './img/dagger.png'
 
-let intervalId = 0, isGameOver = false;
-let thorX = 20, thorY = 580, thorMove = 10 , thorW = thorhq.width/15, thorH = thorhq.height/15;
+let intervalId = 0, isGameOver = false, score= 0;
+let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorhq.width/15, thorH = thorhq.height/15;
 let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
-let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25;
+let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25, mjolnirX = 600;
 
 //events
 document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
+        // stepsAudio.play();
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
+        
         isArrowRight = false
         isArrowLeft = true
     }
 })
 document.addEventListener('keyup', () => {
+    stepsAudio.pause();
     isArrowRight = false
     isArrowLeft = false
 })
@@ -127,7 +131,7 @@ function drawHill3(){
 }
 //mjolnir
 function drawMjolnir(){
-    ctx.drawImage(mjolnirhq, 600, 150, mjolnirW, mjolnirH)
+    ctx.drawImage(mjolnirhq, mjolnirX, 150, mjolnirW, mjolnirH)
 }
 //thor
 function drawThor(){
@@ -150,56 +154,43 @@ let daggers = [
 
 
 function thorMoving(){
-    if(thorY>=453){
-        if(isArrowRight && thorX+thorW<canvas.width-20 ){
-            
-            thorX += Math.floor(thorMove/1.5)
-            thorY -= Math.floor(thorMove/9)
-           
-            
+    if(thorY>=449 && thorY<= canvas.height){
+        if(isArrowRight && thorX+thorW<=canvas.width ){
+            thorX += thorMove
+            thorY -= thorMove/7
         }
         if(isArrowLeft && thorX-10>0){
-            thorX -=Math.floor(thorMove/1.5)
-            thorY +=Math.floor(thorMove/9)
-           
+            thorX -=thorMove
+            thorY +=thorMove/7
         }
     }
-    else if(thorY<=452 && thorY>=306){
+    if(thorY<449 && thorY > 241){
         if(isArrowLeft && thorX-10>0){
-            
-            thorX -= Math.floor(thorMove/1.5)
-            thorY -= Math.floor(thorMove/9)
-            console.log(thorY)
-            console.log(thorX)
-            console.log("cond3")
-            
+            thorX -= thorMove
+            thorY -= thorMove/4.5
         }
-        if(isArrowRight && thorX+thorW<canvas.width-20 ){
-            thorX +=Math.floor(thorMove/1.5)
-            thorY +=Math.floor(thorMove/9)
-            console.log(thorY)
-            console.log(thorX)
-            console.log("cond4")
-        }
-    }else if(thorY<=305 && thorY>0){
-
-        if(isArrowRight && thorX+thorW<canvas.width-20 ){
-            
-            thorX += Math.floor(thorMove/1.5)
-            thorY -= Math.floor(thorMove/9)
-            console.log(thorY)
-            console.log(thorX)
-            console.log("cond5")
-            
-        }
-        if(isArrowLeft && thorX-10>0){
-            thorX -=Math.floor(thorMove/1.5)
-            thorY +=Math.floor(thorMove/9)
-            console.log(thorY)
-            console.log(thorX)
-            console.log("cond6")
+        if(isArrowRight && thorX+thorW<=canvas.width){
+            thorX +=thorMove
+            thorY +=thorMove/4.5
         }
     }
+    if(thorY<241 && thorY>0){
+        if(isArrowRight && thorX+thorW<=canvas.width){
+            thorX += thorMove
+            thorY -= thorMove/4.3
+            if(thorX == mjolnirX){
+                score++ 
+                scoreId.innerText = `Highscore: ${score}`
+                isGameOver= true;
+                console.log("win")
+            }
+        }
+        if(isArrowLeft && thorX-10>0){
+            thorX -=thorMove
+            thorY +=thorMove/4.3
+        }
+    }
+    
 }
 
 function daggerMoving(){
@@ -244,8 +235,9 @@ function animate(){
     
     drawLoki() 
     
-    daggerMoving()
+    // daggerMoving()
     
+  
     
     if (isGameOver) {
         
@@ -279,7 +271,7 @@ function start(){
     splashScreen.style.display = 'none'
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
-    restartBtn.style.display = 'block'
+    restartBtn.style.display = 'none'
     animate()
 }
 
@@ -310,7 +302,7 @@ function gameOver() {
 }
 
 
-
+let stepsAudio = new Audio('./steps.mp3')
 let gameOverAudio = new Audio('./game-over.mp3')
 let stabAudio = new Audio('./stab.mp3')
 
