@@ -15,7 +15,6 @@ let restartBtn = document.querySelector('#restart')
 let scoreId = document.querySelector('.hs')
 
 
-
 let mjolnirhq = new Image();
 mjolnirhq.src = './img/mjolnir-hq.png'
 
@@ -33,11 +32,12 @@ lokihq.src = './img/loki.png'
 let dagger = new Image();
 dagger.src = './img/dagger.png'
 
+ 
 let intervalId = 0, isGameOver = false, score= 0, highscore= 0;
 let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorDefault.width/15, thorH = thorDefault.height/15;
 let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
-let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25, mjolnirX = 600;
+let mjolnirW = mjolnirhq.width/30, mjolnirH = mjolnirhq.height/30, mjolnirX = 600;
 
 //events
 document.addEventListener('keydown', (event) => {
@@ -49,6 +49,7 @@ document.addEventListener('keydown', (event) => {
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
+        stepsAudio.play();
         thorDefault = thorLeft
         isArrowRight = false
         isArrowLeft = true
@@ -192,8 +193,9 @@ function thorMoving(){
             thorY +=thorMove/4.3
         }
     }
-    if(thorY <= 150 && thorX >= 600){
-        score++
+    if(thorY <= 150 && thorX >=600){
+        gameWin.play();
+        score+=1
         if(score>highscore){
             highscore = score
             scoreId.innerText = `Highscore: ${score}`
@@ -228,6 +230,7 @@ function daggerMoving(){
             stabAudio.play();
             gameOverText.innerText = 'Game Over!'
             isGameOver = true;
+            gameOverAudio.play();
             
             console.log('hit')
         }
@@ -248,13 +251,13 @@ function animate(){
     
     drawLoki() 
     
-    daggerMoving()
+    // daggerMoving()
     
   
     
     if (isGameOver) {
         
-        gameOverAudio.play();
+        
         cancelAnimationFrame(intervalId);
         canvas.style.display = 'none'
         gameOverScreen.style.display = 'block'
@@ -317,6 +320,7 @@ function gameOver() {
 
 let stepsAudio = new Audio('./steps.mp3')
 let gameOverAudio = new Audio('./game-over.mp3')
+let gameWin = new Audio('./gamewin.wav')
 let stabAudio = new Audio('./stab.mp3')
 
 window.addEventListener('load', () => {
