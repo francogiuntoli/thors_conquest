@@ -194,14 +194,16 @@ function thorMoving(){
         }
     }
     if(thorY <= 150 && thorX >=600){
-        gameWin.play();
+        
         score+=1
+        
         if(score>highscore){
             highscore = score
             scoreId.innerText = `Highscore: ${score}`
         }
         gameOverText.innerText = 'Congratulations!'
-        isGameOver= true;
+        gameWin.play();
+        isGameOver = true;
         console.log('win')
 
     }
@@ -320,7 +322,7 @@ function gameOver() {
 
 let stepsAudio = new Audio('./steps.mp3')
 let gameOverAudio = new Audio('./game-over.mp3')
-let gameWin = new Audio('./gamewin.wav')
+let gameWin = new Audio('./wingame.mp3')
 let stabAudio = new Audio('./stab.mp3')
 
 window.addEventListener('load', () => {
