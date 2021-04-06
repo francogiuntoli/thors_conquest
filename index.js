@@ -7,11 +7,12 @@ canvas.style.backgroundColor = '#f0c6a3'
 
 // The DOM of the start and the restart buttons
 let gameOverScreen = document.querySelector('#gameover')
+let gameOverText = document.querySelector('.congover')
 let startBtn = document.querySelector('#start')
 let mainMenuBtn = document.querySelector('#mainmenu')
 let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
-let scoreId = document.querySelector('#score')
+let scoreId = document.querySelector('.hs')
 
 
 
@@ -27,7 +28,7 @@ lokihq.src = './img/loki.png'
 let dagger = new Image();
 dagger.src = './img/dagger.png'
 
-let intervalId = 0, isGameOver = false, score= 0;
+let intervalId = 0, isGameOver = false, score= 0, highscore= 0;
 let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorhq.width/15, thorH = thorhq.height/15;
 let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
@@ -178,17 +179,23 @@ function thorMoving(){
         if(isArrowRight && thorX+thorW<=canvas.width){
             thorX += thorMove
             thorY -= thorMove/4.3
-            if(thorX == mjolnirX){
-                score++ 
-                scoreId.innerText = `Highscore: ${score}`
-                isGameOver= true;
-                console.log("win")
-            }
+            
         }
         if(isArrowLeft && thorX-10>0){
             thorX -=thorMove
             thorY +=thorMove/4.3
         }
+    }
+    if(thorY <= 150 && thorX >= 600){
+        score++
+        if(score>highscore){
+            highscore = score
+            scoreId.innerText = `Highscore: ${score}`
+        }
+        gameOverText.innerText = 'Congratulations!'
+        isGameOver= true;
+        console.log('win')
+
     }
     
 }
@@ -213,8 +220,9 @@ function daggerMoving(){
             daggers[i].x = 20
             daggers[i].y = -1000
             // stabAudio.play();
-            
+            gameOverText.innerText = 'Game Over!'
             isGameOver = true;
+            
             console.log('hit')
         }
 
@@ -235,7 +243,7 @@ function animate(){
     
     drawLoki() 
     
-    // daggerMoving()
+    daggerMoving()
     
   
     
