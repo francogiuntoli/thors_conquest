@@ -19,8 +19,13 @@ let scoreId = document.querySelector('.hs')
 let mjolnirhq = new Image();
 mjolnirhq.src = './img/mjolnir-hq.png'
 
-let thorhq = new Image();
-thorhq.src = './img/thor-hq.png'
+let thorRight = new Image();
+thorRight.src = './img/thor-hq.png'
+
+let thorLeft = new Image();
+thorLeft.src = './img/thor-hql.png'
+
+let thorDefault = thorRight
 
 let lokihq = new Image();
 lokihq.src = './img/loki.png'
@@ -29,7 +34,7 @@ let dagger = new Image();
 dagger.src = './img/dagger.png'
 
 let intervalId = 0, isGameOver = false, score= 0, highscore= 0;
-let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorhq.width/15, thorH = thorhq.height/15;
+let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorDefault.width/15, thorH = thorDefault.height/15;
 let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
 let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25, mjolnirX = 600;
@@ -38,12 +43,13 @@ let mjolnirW = mjolnirhq.width/25, mjolnirH = mjolnirhq.height/25, mjolnirX = 60
 document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
-        // stepsAudio.play();
+        thorDefault = thorRight
+        stepsAudio.play();
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
-        
+        thorDefault = thorLeft
         isArrowRight = false
         isArrowLeft = true
     }
@@ -136,7 +142,7 @@ function drawMjolnir(){
 }
 //thor
 function drawThor(){
-    ctx.drawImage(thorhq, thorX, thorY, thorW, thorH)
+    ctx.drawImage(thorDefault, thorX, thorY, thorW, thorH)
 }
 //loki
 function drawLoki(){
@@ -219,7 +225,7 @@ function daggerMoving(){
             
             daggers[i].x = 20
             daggers[i].y = -1000
-            // stabAudio.play();
+            stabAudio.play();
             gameOverText.innerText = 'Game Over!'
             isGameOver = true;
             
@@ -234,7 +240,6 @@ function daggerMoving(){
 
 function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    
     drawMjolnir()
     hills()
       
@@ -249,7 +254,7 @@ function animate(){
     
     if (isGameOver) {
         
-        // gameOverAudio.play();
+        gameOverAudio.play();
         cancelAnimationFrame(intervalId);
         canvas.style.display = 'none'
         gameOverScreen.style.display = 'block'
