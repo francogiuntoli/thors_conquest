@@ -331,7 +331,12 @@ window.addEventListener('load', () => {
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
     gameOverScreen.style.display = 'none'
-    
+    thorW = thorDefault.width/15
+    thorH = thorDefault.height/15
+    daggerW = dagger.width/4
+    daggerH = dagger.height/4
+    mjolnirH = mjolnirhq.height/30
+    mjolnirW = mjolnirhq.width/30
     startBtn.addEventListener('click', () =>{
         start()
         
