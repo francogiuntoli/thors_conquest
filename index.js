@@ -196,7 +196,7 @@ function thorMoving(){
     if(thorY <= 150 && thorX >=600){
         score++
         daggerDrop *=1.2 
-        scoreId.innerText = `Current level ${score}, HighScore: 12`
+        scoreId.innerHTML = `Current level ${score} - HighScore: 12`
         gameOverText.innerText = 'Congratulations!'
         restartBtn.innerText = "Continue"
         gameWin.play();
