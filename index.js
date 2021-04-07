@@ -14,7 +14,7 @@ let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
 let scoreId = document.querySelector('.hs1')
 
-
+// Image loads
 let mjolnirhq = new Image();
 mjolnirhq.src = './img/mjolnir-hq.png'
 
@@ -32,21 +32,21 @@ thorMovingL.src = './img/thor-movingL.png';
 
 let thorDefault = thorRight
 
-
 let lokihq = new Image();
 lokihq.src = './img/loki.png'
 
 let dagger = new Image();
 dagger.src = './img/dagger.png'
 
- 
+//Variables
 let intervalId = 0, isGameOver = false, score= 0, highscore= 0;
 let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorDefault.width/15, thorH = thorDefault.height/15;
 let daggerX = 30, daggerY = -35, daggerDrop = 5, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
 let mjolnirW = mjolnirhq.width/30, mjolnirH = mjolnirhq.height/30, mjolnirX = 600;
 
-//events
+
+//ArrowEvents
 document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
@@ -165,7 +165,7 @@ function drawThor(){
 function drawLoki(){
     ctx.drawImage(lokihq, 750, 0, lokihq.width/1.5, lokihq.height/1.5)
 }
-//dagger
+
 
 
 //for loopin
