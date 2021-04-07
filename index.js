@@ -12,7 +12,7 @@ let startBtn = document.querySelector('#start')
 let mainMenuBtn = document.querySelector('#mainmenu')
 let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
-let scoreId = document.querySelector('.hs')
+let scoreId = document.querySelector('.hs1')
 
 
 let mjolnirhq = new Image();
@@ -35,7 +35,7 @@ dagger.src = './img/dagger.png'
  
 let intervalId = 0, isGameOver = false, score= 0, highscore= 0;
 let thorX = 20, thorY = 580, thorMove = 8 , thorW = thorDefault.width/15, thorH = thorDefault.height/15;
-let daggerX = 30, daggerY = -35, daggerDrop = 10, daggerW = dagger.width/4, daggerH = dagger.height/4;
+let daggerX = 30, daggerY = -35, daggerDrop = 5, daggerW = dagger.width/4, daggerH = dagger.height/4;
 let isArrowLeft = false, isArrowRight = false;
 let mjolnirW = mjolnirhq.width/30, mjolnirH = mjolnirhq.height/30, mjolnirX = 600;
 
@@ -194,14 +194,11 @@ function thorMoving(){
         }
     }
     if(thorY <= 150 && thorX >=600){
-        
-        score+=1
-        
-        if(score>highscore){
-            highscore = score
-            scoreId.innerText = `Highscore: ${score}`
-        }
+        score++
+        daggerDrop *=1.2 
+        scoreId.innerText = `Current level ${score}, HighScore: 12`
         gameOverText.innerText = 'Congratulations!'
+        restartBtn.innerText = "Continue"
         gameWin.play();
         isGameOver = true;
         console.log('win')
@@ -214,7 +211,7 @@ function daggerMoving(){
     
     for(let i=0; i< daggers.length; i++) {
         ctx.drawImage(dagger, daggers[i].x, daggers[i].y, daggerW, daggerH)
-        daggers[i].y += 11
+        daggers[i].y += daggerDrop
         
         // making an infinite loop for the pipes
         if (daggers[i].y >= canvas.height) {
@@ -230,10 +227,13 @@ function daggerMoving(){
             daggers[i].x = 20
             daggers[i].y = -1000
             stabAudio.play();
+            scoreId.innerText = `You maxed at level ${score}, try again!`
+            restartBtn.innerText = "Restart"
             gameOverText.innerText = 'Game Over!'
             isGameOver = true;
             gameOverAudio.play();
-            
+            score = 0
+            daggers[i].y += daggerDrop
             console.log('hit')
         }
 
@@ -253,7 +253,7 @@ function animate(){
     
     drawLoki() 
     
-    // daggerMoving()
+    daggerMoving()
     
   
     
@@ -310,20 +310,21 @@ function restart() {
 }
 
 function gameOver() {
+    scoreId.innerText = `Highscore: ${score}`
     restartBtn.style.display = 'block'
     canvas.style.display = 'none'    
     isGameOver = false;
     thorX = 20;
     thorY= 580;
-    score = 0;
+    
     
 }
 
 
-let stepsAudio = new Audio('./steps.mp3')
-let gameOverAudio = new Audio('./game-over.mp3')
-let gameWin = new Audio('./wingame.mp3')
-let stabAudio = new Audio('./stab.mp3')
+let stepsAudio = new Audio('./sounds/steps.mp3')
+let gameOverAudio = new Audio('./sounds/game-over.mp3')
+let gameWin = new Audio('./sounds/wingame.mp3')
+let stabAudio = new Audio('./sounds/stab.mp3')
 
 window.addEventListener('load', () => {
     startBtn.style.display = 'block'

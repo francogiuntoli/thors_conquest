@@ -1,30 +1,34 @@
 * {
     font-family: "Roboto", sans-serif;
     color:white;
+    
+    
   }
+html{
+    height: 100%;
+}
 body{
     text-align: center;
-     display: flex;
-    justify-content: center;
+        
+    width: auto;
+    height: auto;
+    background-image: url("/img/bg.png");
+    background-size:auto; 
+  }
+#splash{
+    display: flex;
     align-items: center;
     flex-direction: column;
-    
-    width: 1000;
-    height: 800;
-    background-image: url("/img/bg.png");
-    background-repeat: no-repeat;
-    background-size:cover; 
-  }
-
+}
 button{
+    margin-top: 0;
     transition-duration: 0.4s;
     color:rgba(0, 0, 0, 0.8);
     background-color:rgba(255, 255, 255, 0.8);
     border: 3px solid white;
     border-radius: 5px;
-    
     text-align: center;
-    font-size: 3em;
+    font-size: 3rem;
 
 }
 button:hover{
@@ -34,17 +38,23 @@ button:hover{
 
 #restart{
     margin:auto;
+    font-size: 2.5rem;
 }
 h1{
+    margin-bottom: 0 ;
     color:rgba(255, 255, 255, 0.8);
-    font-size: 11rem;
+    font-size: 9rem;
 }
 h2{
     color:rgba(255, 255, 255, 0.8);
-    font-size: 4rem;
+    font-size: 2.5rem;
 }
 p{
-    font-size: 3rem;
+    margin: 0;
+    font-size: 2rem;
+}
+h3{
+    font-size: 2rem;
 }
 
 

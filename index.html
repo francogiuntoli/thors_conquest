@@ -1,7 +1,8 @@
 <!DOCTYPE html> 
 <html lang="en">
-<head>
 
+<head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -12,19 +13,20 @@
 <body>
     <div id="splash">
         <h1>Thor's Conquest<h1>
+        <button id="start">Start Game</button>
         <h2>Instructions:</h2>
         <div id="instr-desc">
             <p>Move the arrows to move Thor up the hill to retrieve Mjolnir<br>
             but beware not to get hit by Loki's daggers as you climb</p>
         </div>
-        <h3 class="hs">Highscore: 0</h3>
+        <h3 class="hs">Highscore: 12</h3>
     </div>
     <div id="gameover">
         <h1 class="congover">Game Over</h1>
-        <h2 class="hs">Highscore: 0</h2>
+        <h2 class="hs1"></h2>
         <button id="restart">Restart</button>
     </div>
-    <button id="start">Start Game</button>
+    
     
     <canvas id="myCanvas" width="1000" height="800"></canvas>
     <script src="index.js"></script>
