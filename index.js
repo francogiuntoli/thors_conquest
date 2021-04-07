@@ -14,7 +14,8 @@ let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
 let scoreId = document.querySelector('.hs1')
 
-
+let bg = newImage();
+bg.src = './img/bg.png'
 let mjolnirhq = new Image();
 mjolnirhq.src = './img/mjolnir-hq.png'
 
@@ -327,6 +328,7 @@ let gameWin = new Audio('./sounds/wingame.mp3')
 let stabAudio = new Audio('./sounds/stab.mp3')
 
 window.addEventListener('load', () => {
+    
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
