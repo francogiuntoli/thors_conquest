@@ -44,19 +44,20 @@ document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
         thorDefault = thorRight
-        stepsAudio.play();
+        
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
-        stepsAudio.play();
+        
         thorDefault = thorLeft
+        
         isArrowRight = false
         isArrowLeft = true
     }
 })
 document.addEventListener('keyup', () => {
-    stepsAudio.pause();
+   
     isArrowRight = false
     isArrowLeft = false
 })

@@ -16,7 +16,9 @@ body{
     text-align: center;
     width: auto;
     height: auto;
-    background-image: url("https://wallpaper.dog/large/275561.jpg");
+    /* background-image: url("https://wallpaper.dog/large/275561.jpg");
+     */
+    background-image: url("/img/bg.png");
     background-size:auto; 
   }
 #splash{
