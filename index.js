@@ -14,8 +14,7 @@ let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
 let scoreId = document.querySelector('.hs1')
 
-let bg = newImage();
-bg.src = './img/bg.png'
+
 let mjolnirhq = new Image();
 mjolnirhq.src = './img/mjolnir-hq.png'
 
@@ -333,7 +332,7 @@ window.addEventListener('load', () => {
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
     gameOverScreen.style.display = 'none'
-    bg
+    
     thorW = thorDefault.width/15
     thorH = thorDefault.height/15
     daggerW = dagger.width/4
