@@ -24,7 +24,14 @@ thorRight.src = './img/thor-hq.png'
 let thorLeft = new Image();
 thorLeft.src = './img/thor-hql.png'
 
+let thorMovingR = new Image();
+thorMovingR.src = './img/thor-movingR.png';
+
+let thorMovingL = new Image();
+thorMovingL.src = './img/thor-movingL.png';
+
 let thorDefault = thorRight
+
 
 let lokihq = new Image();
 lokihq.src = './img/loki.png'
@@ -43,23 +50,31 @@ let mjolnirW = mjolnirhq.width/30, mjolnirH = mjolnirhq.height/30, mjolnirX = 60
 document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
-        thorDefault = thorRight
-        
+        whooshAudio.play()
+        thorDefault = thorMovingR
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
-        
-        thorDefault = thorLeft
-        
+        whooshAudio.play()
+        thorDefault = thorMovingL
         isArrowRight = false
         isArrowLeft = true
     }
 })
-document.addEventListener('keyup', () => {
-   
-    isArrowRight = false
-    isArrowLeft = false
+document.addEventListener('keyup', (event) => {
+    if (event.code == 'ArrowRight'){
+        whooshAudio.pause()
+        thorDefault = thorRight
+        isArrowRight = false
+        isArrowLeft = false
+    }
+    else if (event.code == 'ArrowLeft') {
+        whooshAudio.pause()
+        thorDefault = thorLeft        
+        isArrowRight = false
+        isArrowLeft = false
+    }    
 })
 
 
@@ -322,7 +337,7 @@ function gameOver() {
 }
 
 
-let stepsAudio = new Audio('./sounds/steps.mp3')
+let whooshAudio = new Audio('./sounds/whoosh.mp3')
 let gameOverAudio = new Audio('./sounds/game-over.mp3')
 let gameWin = new Audio('./sounds/wingame.mp3')
 let stabAudio = new Audio('./sounds/stab.mp3')
