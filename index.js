@@ -51,12 +51,14 @@ document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
         whooshAudio.play()
+        whooshAudio.volume  = 0.3;
         thorDefault = thorMovingR
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
         whooshAudio.play()
+        whooshAudio.volume  = 0.3;
         thorDefault = thorMovingL
         isArrowRight = false
         isArrowLeft = true
@@ -211,11 +213,12 @@ function thorMoving(){
     }
     if(thorY <= 150 && thorX >=600){
         score++
-        daggerDrop *=1.2 
+        daggerDrop *= 1.2 
         scoreId.innerHTML = `Current level ${score} - HighScore: 12`
         gameOverText.innerText = 'Congratulations!'
         restartBtn.innerText = "Continue"
         gameWin.play();
+        gameWin.volume = 0.16;
         isGameOver = true;
         console.log('win')
 
@@ -243,13 +246,15 @@ function daggerMoving(){
             daggers[i].x = 20
             daggers[i].y = -1000
             stabAudio.play();
+            stabAudio.volume  = 0.2;
             scoreId.innerText = `You maxed at level ${score}, try again!`
             restartBtn.innerText = "Restart"
             gameOverText.innerText = 'Game Over!'
             isGameOver = true;
             gameOverAudio.play();
+            gameOverAudio.volume = 0.16;
             score = 0
-            daggers[i].y += daggerDrop
+            daggers[i].y = daggerDrop
             console.log('hit')
         }
 
@@ -332,18 +337,19 @@ function gameOver() {
     isGameOver = false;
     thorX = 20;
     thorY= 580;
-    
-    
+        
 }
 
-
+let bgMusic = new Audio('./sounds/bg-music.mp3')
 let whooshAudio = new Audio('./sounds/whoosh.mp3')
 let gameOverAudio = new Audio('./sounds/game-over.mp3')
 let gameWin = new Audio('./sounds/wingame.mp3')
 let stabAudio = new Audio('./sounds/stab.mp3')
 
 window.addEventListener('load', () => {
-    
+    bgMusic.play() 
+    bgMusic.loop = true;   
+    bgMusic.volume=0.18;
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
