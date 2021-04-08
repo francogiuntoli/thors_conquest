@@ -262,7 +262,7 @@ function daggerMoving(){
             gameOverAudio.play();
             gameOverAudio.volume = 0.15;
             score = 0
-            daggers[i].y = daggerDrop
+            daggerDrop = 5;
             console.log('hit')
         }
 
@@ -275,19 +275,13 @@ function animate(){
     drawScore()
     drawMjolnir()
     hills()
-      
     drawThor()
     thorMoving()
-    
     thorW = thorDefault.width/15
     thorH = thorDefault.height/15
-    
     drawLoki() 
-    
     daggerMoving()
-    
-  
-    
+        
     if (isGameOver) {   
         
         cancelAnimationFrame(intervalId);
@@ -297,8 +291,7 @@ function animate(){
     }
     else {
         intervalId = requestAnimationFrame(animate)
-    }
-    
+    }    
 }
 
 
