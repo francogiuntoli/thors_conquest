@@ -51,8 +51,8 @@ document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
         whooshAudio.play()
-        whooshAudio.volume  = 0.3;
-        thorDefault = thorMovingR
+        whooshAudio.volume  = 0.3
+        thorDefault = thorMovingR    
         isArrowRight = true
         isArrowLeft = false
     }
@@ -67,7 +67,7 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
     if (event.code == 'ArrowRight'){
         whooshAudio.pause()
-        thorDefault = thorRight
+        thorDefault = thorRight        
         isArrowRight = false
         isArrowLeft = false
     }
@@ -153,7 +153,14 @@ function drawHill3(){
     ctx.lineTo(canvas.width, canvas.height-350)
     ctx.fill()
     ctx.stroke()
+    
     ctx.closePath()
+}
+//score
+function drawScore(){
+    
+    ctx.font = "30px Roboto";
+    ctx.fillText(`You are on Level ${score}`, 20,30)
 }
 //mjolnir
 function drawMjolnir(){
@@ -180,27 +187,30 @@ let daggers = [
 
 
 function thorMoving(){
-    if(thorY>=449 && thorY<= canvas.height){
+    if(thorY>=461){
         if(isArrowRight && thorX+thorW<=canvas.width ){
             thorX += thorMove
             thorY -= thorMove/7
+            console.log(thorY)            
         }
         if(isArrowLeft && thorX-10>0){
             thorX -=thorMove
             thorY +=thorMove/7
         }
     }
-    if(thorY<449 && thorY > 241){
+    if(thorY<461 && thorY > 267){
         if(isArrowLeft && thorX-10>0){
             thorX -= thorMove
             thorY -= thorMove/4.5
+            console.log(thorY)            
+
         }
         if(isArrowRight && thorX+thorW<=canvas.width){
             thorX +=thorMove
             thorY +=thorMove/4.5
         }
     }
-    if(thorY<241 && thorY>0){
+    if(thorY<=267 && thorY>0){
         if(isArrowRight && thorX+thorW<=canvas.width){
             thorX += thorMove
             thorY -= thorMove/4.3
@@ -218,7 +228,7 @@ function thorMoving(){
         gameOverText.innerText = 'Congratulations!'
         restartBtn.innerText = "Continue"
         gameWin.play();
-        gameWin.volume = 0.16;
+        gameWin.volume = 0.15;
         isGameOver = true;
         console.log('win')
 
@@ -241,8 +251,10 @@ function daggerMoving(){
         }
         
         //collision
-        if(daggers[i].x < thorX + thorW && daggers[i].x + daggerW > thorX && daggers[i].y + 50< thorY+thorH &&daggers[i].y + daggerH > thorY+50){
-            
+        if(daggers[i].x < thorX + thorW && 
+            daggers[i].x + daggerW > thorX && 
+            daggers[i].y + 50< thorY+thorH && 
+            daggers[i].y + daggerH > thorY+50){            
             daggers[i].x = 20
             daggers[i].y = -1000
             stabAudio.play();
@@ -266,11 +278,15 @@ function daggerMoving(){
 
 function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawScore()
     drawMjolnir()
     hills()
       
     drawThor()
     thorMoving()
+    
+    thorW = thorDefault.width/15
+    thorH = thorDefault.height/15
     
     drawLoki() 
     
@@ -278,8 +294,7 @@ function animate(){
     
   
     
-    if (isGameOver) {
-        
+    if (isGameOver) {   
         
         cancelAnimationFrame(intervalId);
         canvas.style.display = 'none'
@@ -298,6 +313,9 @@ function animate(){
 
 //screens
 function start(){
+    bgMusic.play() 
+    bgMusic.loop = true; 
+    bgMusic.volume=0.15;
     daggers = [
         {x: 20, y: -500},
         {x: 300, y: -50},
@@ -347,14 +365,13 @@ let gameWin = new Audio('./sounds/wingame.mp3')
 let stabAudio = new Audio('./sounds/stab.mp3')
 
 window.addEventListener('load', () => {
-    bgMusic.play() 
-    bgMusic.loop = true;   
-    bgMusic.volume=0.18;
+      
+    
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
     gameOverScreen.style.display = 'none'
-    
+    thorDefault = thorRight
     thorW = thorDefault.width/15
     thorH = thorDefault.height/15
     daggerW = dagger.width/4
@@ -363,7 +380,9 @@ window.addEventListener('load', () => {
     mjolnirW = mjolnirhq.width/30
 
     startBtn.addEventListener('click', () =>{
-        start()        
+        console.log(thorH, thorW)        
+        start()
+        
     })
     restartBtn.addEventListener('click', () => {
         restart()

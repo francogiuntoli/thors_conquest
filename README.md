@@ -1,6 +1,6 @@
 # Project's name
 Thor's Conquest!
-
+<a href='http://chipicuajo.github.io/thors_conquest'>See live demo</a>
 
 ## Description
 Thor needs to get to Mjolnir/Stormbreaker without getting hit by Loki's knives preventing it.
@@ -12,8 +12,9 @@ Use arrowkeys to move left and right to move throught the hills.
 
 
 ## Backlog
-Adding stairs? + up/down movement.
-Adding 2nd level? + difficulty/lives
+Making him fly
+Adding levels + difficulty/lives
+
 
 ## Data structure
 
@@ -25,23 +26,23 @@ Definition of the different states and their transition (transition functions)
 
 - splashScreen
 - gameScreen
-- gameoverScreen
-- winScreen
-
-
+- gameoverScreen/winScreen
 ## Task
 
+DOM - buildDOM
+game - build Canvas
+game - build splash screen
+game - addEventListener
+game - build Game screen
+game - build GameOver/Win screen
+game - start Loop
+game - load images / drawCanvas
 
-
-## Additional Links
-
-
-### Trello
-[Link url](https://trello.com)
-
+elements listeners -(addEventListeners : movements -left, right, edges)
+game - flying 
 
 ### Slides
-[Link Slides.com](http://slides.com)
+<a href="https://docs.google.com/presentation/d/1VnboLla1cr1GF9My3C5WAQ8jiYQqXOA6Ls-6px3-GbI/edit?usp=sharing"> Slides</a>
 
 
 
