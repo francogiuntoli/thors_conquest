@@ -9,7 +9,6 @@ canvas.style.backgroundColor = '#f0c6a3'
 let gameOverScreen = document.querySelector('#gameover')
 let gameOverText = document.querySelector('.congover')
 let startBtn = document.querySelector('#start')
-let mainMenuBtn = document.querySelector('#mainmenu')
 let splashScreen = document.querySelector('#splash')
 let restartBtn = document.querySelector('#restart')
 let scoreId = document.querySelector('.hs1')
@@ -175,8 +174,6 @@ function drawLoki(){
     ctx.drawImage(lokihq, 750, 0, lokihq.width/1.5, lokihq.height/1.5)
 }
 
-
-
 //for loopin
 let daggers = [
     {x: 20, y: -500},
@@ -184,7 +181,6 @@ let daggers = [
     {x: 600, y: -150},
     {x: 450, y: -350},
 ];
-
 
 function thorMoving(){
     if(thorY>=461){
@@ -274,8 +270,6 @@ function daggerMoving(){
 
 }
 
-
-
 function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     drawScore()
@@ -308,10 +302,7 @@ function animate(){
 }
 
 
-
-
-
-//screens
+//Buttons and ScreenToggles
 function start(){
     bgMusic.play() 
     bgMusic.loop = true; 
@@ -358,15 +349,16 @@ function gameOver() {
         
 }
 
+// audio files
 let bgMusic = new Audio('./sounds/bg-music.mp3')
 let whooshAudio = new Audio('./sounds/whoosh.mp3')
 let gameOverAudio = new Audio('./sounds/game-over.mp3')
 let gameWin = new Audio('./sounds/wingame.mp3')
 let stabAudio = new Audio('./sounds/stab.mp3')
 
+
+//main event Listener
 window.addEventListener('load', () => {
-      
-    
     startBtn.style.display = 'block'
     restartBtn.style.display = 'none'   
     canvas.style.display = 'none'
@@ -380,12 +372,10 @@ window.addEventListener('load', () => {
     mjolnirW = mjolnirhq.width/30
 
     startBtn.addEventListener('click', () =>{
-        console.log(thorH, thorW)        
         start()
         
     })
     restartBtn.addEventListener('click', () => {
         restart()
     })
-    
 })
