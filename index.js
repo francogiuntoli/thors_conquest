@@ -299,7 +299,7 @@ function animate(){
 function start(){
     bgMusic.play() 
     bgMusic.loop = true; 
-    bgMusic.volume=0.05;
+    bgMusic.volume=0.03;
     daggers = [
         {x: 20, y: -500},
         {x: 300, y: -50},
