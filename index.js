@@ -50,14 +50,14 @@ document.addEventListener('keydown', (event) => {
     console.log(event)
     if (event.code == 'ArrowRight'){
         whooshAudio.play()
-        whooshAudio.volume  = 0.18
+        whooshAudio.volume  = 0.05
         thorDefault = thorMovingR    
         isArrowRight = true
         isArrowLeft = false
     }
     else if (event.code == 'ArrowLeft') {
         whooshAudio.play()
-        whooshAudio.volume  = 0.18;
+        whooshAudio.volume  = 0.08;
         thorDefault = thorMovingL
         isArrowRight = false
         isArrowLeft = true
@@ -224,7 +224,7 @@ function thorMoving(){
         gameOverText.innerText = 'Congratulations!'
         restartBtn.innerText = "Continue"
         gameWin.play();
-        gameWin.volume = 0.15;
+        gameWin.volume = 0.05;
         isGameOver = true;
         console.log('win')
 
@@ -254,13 +254,13 @@ function daggerMoving(){
             daggers[i].x = 20
             daggers[i].y = -1000
             stabAudio.play();
-            stabAudio.volume  = 0.18;
+            stabAudio.volume  = 0.08;
             scoreId.innerText = `You maxed at level ${score}, try again!`
             restartBtn.innerText = "Restart"
             gameOverText.innerText = 'Game Over!'
             isGameOver = true;
             gameOverAudio.play();
-            gameOverAudio.volume = 0.15;
+            gameOverAudio.volume = 0.05;
             score = 0
             daggerDrop = 5;
             console.log('hit')
@@ -299,7 +299,7 @@ function animate(){
 function start(){
     bgMusic.play() 
     bgMusic.loop = true; 
-    bgMusic.volume=0.10;
+    bgMusic.volume=0.05;
     daggers = [
         {x: 20, y: -500},
         {x: 300, y: -50},
